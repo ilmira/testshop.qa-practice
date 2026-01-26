@@ -6,10 +6,7 @@ class TestFirstDeskPage:
         first_desk = FirstDeskPage(driver)
         first_desk.open()
 
-        products = first_desk.find_elements(first_desk.PRODUCTS)
-        contact_us = first_desk.find_element(first_desk.CONTACT_US)
-
-        assert contact_us and contact_us.text == 'Contact Us'
-        assert len(products) == 9
-        assert products[0].text == 'Customizable Desk'
-        assert products[8].text == 'Desk Stand with Screen'
+        assert first_desk.is_contact_us_displayed()
+        assert first_desk.is_cart_icon_displayed()
+        assert first_desk.get_product_count() == 9
+        assert first_desk.select_first_product().text == 'Customizable Desk'

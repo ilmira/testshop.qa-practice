@@ -1,3 +1,6 @@
+import time
+
+from pages.cart_page import CartPage
 from pages.product_page import ProductPage
 
 
@@ -6,12 +9,11 @@ class TestProductPage:
         product = ProductPage(driver)
         product.open()
 
-        add_to_cart = product.find_element(product.ADD_TO_CART)
-        contact_us = product.find_element(product.CONTACT_US)
-        name = product.find_element(product.NAME)
-        price = product.find_element(product.PRICE)
+        assert product.is_contact_us_displayed()
+        assert product.get_product_name() == 'Office Design Software'
+        assert product.get_product_price() == '280.00'
 
-        assert contact_us and contact_us.text == 'Contact Us'
-        assert add_to_cart and add_to_cart.text == 'Add to cart'
-        assert name.text == 'Office Design Software'
-        assert price.text == '280.00'
+        product.add_to_cart()
+        assert product.is_cart_not_empty()
+        assert product.number_of_products_in_cart() == 1
+

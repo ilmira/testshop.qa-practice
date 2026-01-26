@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 
 class BasePage:
 
-    CONTACT_US = By.CSS_SELECTOR, 'a[href="/contactus"]'
+    CONTACT_US = (By.CSS_SELECTOR, 'a[href="/contactus"]')
 
     def __init__(self, driver):
         self.driver: WebDriver = driver
@@ -21,4 +21,12 @@ class BasePage:
 
     def find_elements(self, locator):
         return self.wait.until(EC.presence_of_all_elements_located(locator))
+
+    def click_element(self, element):
+        element = self.wait.until(EC.element_to_be_clickable(element))
+        element.click()
+
+    def is_contact_us_displayed(self):
+        contact_us = self.find_element(self.CONTACT_US)
+        return contact_us.is_displayed() and contact_us.text == 'Contact Us'
 
