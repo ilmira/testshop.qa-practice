@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 
 class ProductPage(BasePage):
-    PAGE_URL = 'http://testshop.qa-practice.com/shop/furn-9999-office-design-software-7?category=9'
+    PAGE_URL = '/shop/furn-9999-office-design-software-7?category=9'
     ADD_TO_CART = (By.ID, 'add_to_cart')
     NAME = (By.CSS_SELECTOR, 'h1[itemprop="name"]')
     PRICE = (By.CSS_SELECTOR, 'span[class="oe_currency_value"]')
@@ -18,16 +18,20 @@ class ProductPage(BasePage):
         cart = self.find_element(self.CART)
         self.click_element(cart)
 
-    def is_cart_not_empty(self):
-        return self.find_element(self.NOT_EMPTY_CART).is_displayed()
+    def check_is_cart_not_empty(self):
+        assert self.find_element(self.NOT_EMPTY_CART).is_displayed()
 
-    def number_of_products_in_cart(self):
-        return self.find_element(self.NOT_EMPTY_CART).text
+    def check_number_of_products_in_cart(self):
+        number_of_products_in_cart = self.find_element(self.NOT_EMPTY_CART)
+        assert number_of_products_in_cart
+        assert number_of_products_in_cart.text == '1'
 
-    def get_product_price(self):
+    def check_product_price(self):
         price_element = self.find_element(self.PRICE)
-        return price_element.text
+        assert price_element
+        assert price_element.text == '280.00'
 
-    def get_product_name(self):
+    def check_product_name(self):
         name_element = self.find_element(self.NAME)
-        return name_element.text
+        assert name_element
+        assert name_element.text == 'Office Design Software'

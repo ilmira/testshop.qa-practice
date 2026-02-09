@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 
 class CartPage(BasePage):
-    PAGE_URL = 'http://testshop.qa-practice.com/shop/cart'
+    PAGE_URL = '/shop/cart'
     ORDER_OVERVIEW = (By.CLASS_NAME, 'mb-4')
     EMPTY_CART = (By.CLASS_NAME, 'js_cart_lines.alert.alert-info')
     REVIEW_ORDER = (By.XPATH, "//p[text()='Review Order']")
@@ -17,8 +17,20 @@ class CartPage(BasePage):
         if remove_buttons:
             self.click_element(remove_buttons[0])
 
-    def is_checkout_button_visible(self):
-        checkout_button = self.find_element(self.CHECKOUT)
-        return checkout_button.is_displayed()
+    def check_is_checkout_button_visible(self):
+        assert self.find_element(self.CHECKOUT).is_displayed()
 
+    def check_empty_cart_text(self):
+        assert self.find_element(self.EMPTY_CART).text == 'Your cart is empty!'
 
+    def check_order_overview_text(self):
+        assert self.find_element(self.ORDER_OVERVIEW).text == 'Order overview'
+
+    def check_cart_shipping(self):
+        assert self.find_element(self.SHIPPING).is_displayed()
+
+    def check_cart_payment(self):
+        assert self.find_element(self.PAYMENT).is_displayed()
+
+    def check_cart_review_order(self):
+        assert self.find_element(self.REVIEW_ORDER).is_displayed()

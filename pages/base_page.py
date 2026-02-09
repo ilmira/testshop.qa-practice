@@ -6,15 +6,16 @@ from selenium.webdriver.common.by import By
 
 
 class BasePage:
-
     CONTACT_US = (By.CSS_SELECTOR, 'a[href="/contactus"]')
+    BASE_PAGE = 'http://testshop.qa-practice.com'
+    PAGE_URL = ''
 
     def __init__(self, driver):
         self.driver: WebDriver = driver
         self.wait = WebDriverWait(driver, 10)
 
     def open(self):
-        self.driver.get(self.PAGE_URL)
+        self.driver.get(f'{self.BASE_PAGE}{self.PAGE_URL}')
 
     def find_element(self, locator):
         return self.wait.until(EC.presence_of_element_located(locator))
@@ -26,7 +27,6 @@ class BasePage:
         element = self.wait.until(EC.element_to_be_clickable(element))
         element.click()
 
-    def is_contact_us_displayed(self):
+    def check_is_contact_us_displayed(self):
         contact_us = self.find_element(self.CONTACT_US)
-        return contact_us.is_displayed() and contact_us.text == 'Contact Us'
-
+        assert contact_us.is_displayed() and contact_us.text == 'Contact Us'
