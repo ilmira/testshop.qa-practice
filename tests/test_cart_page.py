@@ -1,8 +1,8 @@
 class TestCartPage:
     def test_cart_page(self, cart, product):
         cart.open()
-        cart.check_is_contact_us_displayed()
-        cart.check_empty_cart_text()
+        cart.check_is_contact_us_displayed('Contact Us')
+        cart.check_cart_alert_text()
 
         product.open()
         product.add_to_cart()
@@ -14,7 +14,7 @@ class TestCartPage:
 
         cart.remove_items()
 
-        cart.check_empty_cart_text()
+        cart.check_cart_alert_text('Your cart is empty!')
 
         cart.check_cart_shipping()
         cart.check_cart_payment()

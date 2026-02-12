@@ -27,6 +27,6 @@ class BasePage:
         element = self.wait.until(EC.element_to_be_clickable(element))
         element.click()
 
-    def check_is_contact_us_displayed(self):
+    def check_is_contact_us_displayed(self, text):
         contact_us = self.find_element(self.CONTACT_US)
-        assert contact_us.is_displayed() and contact_us.text == 'Contact Us'
+        assert contact_us.is_displayed() and contact_us.text == text

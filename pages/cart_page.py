@@ -20,8 +20,8 @@ class CartPage(BasePage):
     def check_is_checkout_button_visible(self):
         assert self.find_element(self.CHECKOUT).is_displayed()
 
-    def check_empty_cart_text(self):
-        assert self.find_element(self.EMPTY_CART).text == 'Your cart is empty!'
+    def check_cart_alert_text(self, text):
+        assert self.find_element(self.EMPTY_CART).text == text
 
     def check_order_overview_text(self):
         assert self.find_element(self.ORDER_OVERVIEW).text == 'Order overview'

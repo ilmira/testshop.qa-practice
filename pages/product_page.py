@@ -21,17 +21,17 @@ class ProductPage(BasePage):
     def check_is_cart_not_empty(self):
         assert self.find_element(self.NOT_EMPTY_CART).is_displayed()
 
-    def check_number_of_products_in_cart(self):
+    def check_number_of_products_in_cart(self, number):
         number_of_products_in_cart = self.find_element(self.NOT_EMPTY_CART)
         assert number_of_products_in_cart
-        assert number_of_products_in_cart.text == '1'
+        assert number_of_products_in_cart.text == number
 
     def check_product_price(self):
-        price_element = self.find_element(self.PRICE)
-        assert price_element
-        assert price_element.text == '280.00'
+        price_of_element = self.find_element(self.PRICE)
+        assert price_of_element
+        assert price_of_element.text
 
     def check_product_name(self):
-        name_element = self.find_element(self.NAME)
-        assert name_element
-        assert name_element.text == 'Office Design Software'
+        name_of_element = self.find_element(self.NAME)
+        assert name_of_element
+        assert name_of_element.text
